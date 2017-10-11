@@ -25,6 +25,8 @@ function setInitialCenter() {
 // Die eigentliche Karte initialisieren
 function main() {
 
+    var new_event_marker;
+
     // Bounding Box festlegen
     var bounds = [
         [46.4227, 5.9985],
@@ -102,7 +104,7 @@ function main() {
         }
     });
 
-    var ha = L.geoJson(hausaerzte, {
+    var ha = L.geoJson(hausaerzte_region, {
         pointToLayer: function(feature, latlng) {
             return L.marker(latlng, {
                 riseOnHover: true,
@@ -112,7 +114,7 @@ function main() {
         onEachFeature: onEachFeature,
     });
 
-    var fa = L.geoJson(fachaerzte, {
+    var fa = L.geoJson(fachaerzte_region, {
         pointToLayer: function(feature, latlng) {
             return L.marker(latlng, {
                 riseOnHover: true,
@@ -122,14 +124,14 @@ function main() {
         onEachFeature: onEachFeature,
     });
 
-    var za = L.geoJson(zahnaerzte, {
+    var za = L.geoJson(zahnaerzte_region, {
         pointToLayer: function(feature, latlng) {
             return L.marker(latlng, {
                 riseOnHover: true,
                 icon: yellowIcon,
             });
         },
-        onEachFeature: onEachFeature,
+        onEachFeature: onEachFeatureZahn,
     });
 
     var alle = L.layerGroup([ha, fa, za]);
@@ -178,24 +180,24 @@ function main() {
         map.on('click', function(e) {
             var lat = e.latlng.lat;
             var lon = e.latlng.lng;
-                if (typeof(new_event_marker) === 'undefined') {
-                    new_event_marker = new L.marker(e.latlng, { draggable: true, icon: redIcon });
-                    new_event_marker.addTo(map);
+            if (typeof(new_event_marker) === 'undefined') {
+                new_event_marker = new L.marker(e.latlng, { draggable: true, icon: redIcon });
+                new_event_marker.addTo(map);
 
-                } else {
-                    new_event_marker.setLatLng(e.latlng);
-                }
+            } else {
+                new_event_marker.setLatLng(e.latlng);
+            }
 
-                var nearest = leafletKnn(fa).nearest(L.latLng(lat, lon), 1);
-                var near1 = leafletKnn(fa).nearest(L.latLng(lat, lon), 10000, 1000);
-                var near5 = leafletKnn(fa).nearest(L.latLng(lat, lon), 10000, 5000);
-                var near10 = leafletKnn(fa).nearest(L.latLng(lat, lon), 10000, 10000);
-                var near20 = leafletKnn(fa).nearest(L.latLng(lat, lon), 10000, 20000);
-                document.getElementById("infotext").innerHTML = '<center><p><b>Nächster Facharzt: ' + nearest[0].layer.feature.properties.name + '</p></b>' +
-                    'Fachärzte im Umkreis von 1km: ' + near1.length + '<br>' +
-                    'Fachärzte im Umkreis von 5km: ' + near5.length + '<br>' +
-                    'Fachärzte im Umkreis von 10km: ' + near10.length + '<br>' +
-                    'Fachärzte im Umkreis von 20km: ' + near20.length + '<br></center>';
+            var nearest = leafletKnn(fa).nearest(L.latLng(lat, lon), 1);
+            var near1 = leafletKnn(fa).nearest(L.latLng(lat, lon), 10000, 1000);
+            var near5 = leafletKnn(fa).nearest(L.latLng(lat, lon), 10000, 5000);
+            var near10 = leafletKnn(fa).nearest(L.latLng(lat, lon), 10000, 10000);
+            var near20 = leafletKnn(fa).nearest(L.latLng(lat, lon), 10000, 20000);
+            document.getElementById("infotext").innerHTML = '<center><p><b>Nächster Facharzt: ' + nearest[0].layer.feature.properties.name + '</p></b>' +
+                'Fachärzte im Umkreis von 1km: ' + near1.length + '<br>' +
+                'Fachärzte im Umkreis von 5km: ' + near5.length + '<br>' +
+                'Fachärzte im Umkreis von 10km: ' + near10.length + '<br>' +
+                'Fachärzte im Umkreis von 20km: ' + near20.length + '<br></center>';
 
         })
     }
@@ -207,24 +209,24 @@ function main() {
         map.on('click', function(e) {
             var lat = e.latlng.lat;
             var lon = e.latlng.lng;
-                if (typeof(new_event_marker) === 'undefined') {
-                    new_event_marker = new L.marker(e.latlng, { draggable: true, icon: redIcon });
-                    new_event_marker.addTo(map);
+            if (typeof(new_event_marker) === 'undefined') {
+                new_event_marker = new L.marker(e.latlng, { draggable: true, icon: redIcon });
+                new_event_marker.addTo(map);
 
-                } else {
-                    new_event_marker.setLatLng(e.latlng);
-                }
+            } else {
+                new_event_marker.setLatLng(e.latlng);
+            }
 
-                var nearest = leafletKnn(za).nearest(L.latLng(lat, lon), 1);
-                var near1 = leafletKnn(za).nearest(L.latLng(lat, lon), 10000, 1000);
-                var near5 = leafletKnn(za).nearest(L.latLng(lat, lon), 10000, 5000);
-                var near10 = leafletKnn(za).nearest(L.latLng(lat, lon), 10000, 10000);
-                var near20 = leafletKnn(za).nearest(L.latLng(lat, lon), 10000, 20000);
-                document.getElementById("infotext").innerHTML = '<center><p><b>Nächster Zahnarzt: ' + nearest[0].layer.feature.properties.Name + '</p></b>' +
-                    'Zahnärzte im Umkreis von 1km: ' + near1.length + '<br>' +
-                    'Zahnärzte im Umkreis von 5km: ' + near5.length + '<br>' +
-                    'Zahnärzte im Umkreis von 10km: ' + near10.length + '<br>' +
-                    'Zahnärzte im Umkreis von 20km: ' + near20.length + '<br></center>';
+            var nearest = leafletKnn(za).nearest(L.latLng(lat, lon), 1);
+            var near1 = leafletKnn(za).nearest(L.latLng(lat, lon), 10000, 1000);
+            var near5 = leafletKnn(za).nearest(L.latLng(lat, lon), 10000, 5000);
+            var near10 = leafletKnn(za).nearest(L.latLng(lat, lon), 10000, 10000);
+            var near20 = leafletKnn(za).nearest(L.latLng(lat, lon), 10000, 20000);
+            document.getElementById("infotext").innerHTML = '<center><p><b>Nächster Zahnarzt: ' + nearest[0].layer.feature.properties.name + '</p></b>' +
+                'Zahnärzte im Umkreis von 1km: ' + near1.length + '<br>' +
+                'Zahnärzte im Umkreis von 5km: ' + near5.length + '<br>' +
+                'Zahnärzte im Umkreis von 10km: ' + near10.length + '<br>' +
+                'Zahnärzte im Umkreis von 20km: ' + near20.length + '<br></center>';
 
         })
     }
@@ -234,45 +236,18 @@ function main() {
     document.querySelector(".za").addEventListener('click', zahnarztClick);
     hausarztClick();
 
-
-    // Möglichkeit schaffen, ab Zoomstufe 12 eigenen Marker per Click anzulegen
-    var new_event_marker;
-
-    /*    function onMapClick() {
-            map.on('click', function(e) {
-                var lat = e.latlng.lat;
-                var lon = e.latlng.lng;
-                var currentZoom = map.getZoom();
-
-                if (currentZoom > 10) {
-                    if (typeof(new_event_marker) === 'undefined') {
-                        new_event_marker = new L.marker(e.latlng, { draggable: true, icon: redIcon });
-                        new_event_marker.addTo(map);
-
-                    } else {
-                        new_event_marker.setLatLng(e.latlng);
-                    }
-
-                    var nearest = leafletKnn(ha).nearest(L.latLng(lat, lon), 1);
-                    var near1 = leafletKnn(ha).nearest(L.latLng(lat, lon), 10000, 1000);
-                    var near5 = leafletKnn(ha).nearest(L.latLng(lat, lon), 10000, 5000);
-                    var near10 = leafletKnn(ha).nearest(L.latLng(lat, lon), 10000, 5000);
-                    var near20 = leafletKnn(ha).nearest(L.latLng(lat, lon), 10000, 5000);
-                    console.log(nearest);
-                    console.log(near1.length);
-                    console.log(near5.length);
-                }
-            })
-        }
-
-        onMapClick();*/
-
-
     function onEachFeature(feature, layer) {
         layer.on('click', function(e) {
             document.getElementById("infotext").innerHTML = '<center><p><b>Praxis ' + feature.properties.praxis + '</b></p><p>' + feature.properties.straße + ' in ' + feature.properties.plz_ort + '</center>';
         });
     }
+
+    function onEachFeatureZahn(feature, layer) {
+        layer.on('click', function(e) {
+            document.getElementById("infotext").innerHTML = '<center><p><b>' + feature.properties.name + '</b></p><p>' + feature.properties.straße + ' in ' + feature.properties.plz_ort + '</center>';
+        });
+    }
+
 
     // add swoopy arrow
     new L.SwoopyArrow([49.3224120, 9.3540690], [49.1426930, 9.2108790], {
