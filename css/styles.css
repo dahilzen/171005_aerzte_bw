@@ -86,6 +86,11 @@ body,
     left: 0;
     margin-left: auto;
     margin-right: auto;
+    height: 220px;
+  }
+
+  h2{
+    margin-top: -5px;
   }
 
   .infocontent {
