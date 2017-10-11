@@ -162,9 +162,6 @@ function main() {
             var near5 = leafletKnn(ha).nearest(L.latLng(lat, lon), 10000, 5000);
             var near10 = leafletKnn(ha).nearest(L.latLng(lat, lon), 10000, 10000);
             var near20 = leafletKnn(ha).nearest(L.latLng(lat, lon), 10000, 20000);
-            console.log(nearest);
-            console.log(near1.length);
-            console.log(near5.length);
             document.getElementById("infotext").innerHTML = '<center><p><b>Nächster Hausarzt: ' + nearest[0].layer.feature.properties.name + '</p></b>' +
                 'Hausärzte im Umkreis von 1km: ' + near1.length + '<br>' +
                 'Hausärzte im Umkreis von 5km: ' + near5.length + '<br>' +
@@ -194,9 +191,6 @@ function main() {
                 var near5 = leafletKnn(fa).nearest(L.latLng(lat, lon), 10000, 5000);
                 var near10 = leafletKnn(fa).nearest(L.latLng(lat, lon), 10000, 10000);
                 var near20 = leafletKnn(fa).nearest(L.latLng(lat, lon), 10000, 20000);
-                console.log(nearest);
-                console.log(near1.length);
-                console.log(near5.length);
                 document.getElementById("infotext").innerHTML = '<center><p><b>Nächster Facharzt: ' + nearest[0].layer.feature.properties.name + '</p></b>' +
                     'Fachärzte im Umkreis von 1km: ' + near1.length + '<br>' +
                     'Fachärzte im Umkreis von 5km: ' + near5.length + '<br>' +
@@ -226,9 +220,6 @@ function main() {
                 var near5 = leafletKnn(za).nearest(L.latLng(lat, lon), 10000, 5000);
                 var near10 = leafletKnn(za).nearest(L.latLng(lat, lon), 10000, 10000);
                 var near20 = leafletKnn(za).nearest(L.latLng(lat, lon), 10000, 20000);
-                console.log(nearest);
-                console.log(near1.length);
-                console.log(near5.length);
                 document.getElementById("infotext").innerHTML = '<center><p><b>Nächster Zahnarzt: ' + nearest[0].layer.feature.properties.Name + '</p></b>' +
                     'Zahnärzte im Umkreis von 1km: ' + near1.length + '<br>' +
                     'Zahnärzte im Umkreis von 5km: ' + near5.length + '<br>' +
