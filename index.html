@@ -1,21 +1,41 @@
 <!DOCTYPE html>
 <html>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
 <head>
     <title>Ärzte in der Region Heilbronn</title>
+    <link rel="stylesheet" type="text/css" href="css/leaflet-search.min.css">
+    <link rel="stylesheet" type="text/css" href="css/leaflet-search.mobile.min.css">
+    <link rel="stylesheet" type="text/css" href="css/MarkerCluster.css">
     <link rel="stylesheet" type="text/css" href="css/leaflet.css">
     <link rel="stylesheet" type="text/css" href="css/styles.css">
-    <link rel="stylesheet" type="text/css" href="css/MarkerCluster.css">
-    <link rel="stylesheet" type="text/css" href="css/MarkerCluster.Default.css">
 </head>
 
 <body>
-    <div id="map"></div>
+    <div id="map">
+         <div id="info">
+            <div class="infocontent">
+                <h2><center>Wählen Sie eine Arztgruppe</center></h2>
+                <div class="control">
+                    <button type="button" autofocus class="button ha">Hausärzte</button>
+                    <button type="button" class="button fa">Fachärzte</button>
+                    <button type="button" class="button za">Zahnärzte</button>
+                </div>
+                <div id="infotext">
+                    Klicken Sie auf einen Marker, um mehr Informationen zu erhalten.
+                </div>
+            </div>
+        </div> 
+    </div>
     <script type="text/javascript" src="js/leaflet.js"></script>
     <script type="text/javascript" src="js/leaflet-color-markers.js"></script>
-    <script type="text/javascript" src="js/aerzte_bw.js"></script>
+    <script type="text/javascript" src="data/hausaerzte_bw.js"></script>
+    <script type="text/javascript" src="data/fachaerzte_bw.js"></script>
+    <script type="text/javascript" src="data/zahnaerzte_bw.js"></script>
     <script type="text/javascript" src="js/leaflet.markercluster.js"></script>
+    <script type="text/javascript" src="js/Leaflet.SwoopyArrow.min.js"></script>
+    <script type="text/javascript" src="js/leaflet-knn.min.js"></script>
     <script type="text/javascript" src="js/map.js"></script>
 </body>
 
