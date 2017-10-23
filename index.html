@@ -4,35 +4,44 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
 <head>
-  <title>Ärzte in der Region Heilbronn</title>
-  <link rel="stylesheet" type="text/css" href="css/MarkerCluster.css">
-  <link rel="stylesheet" type="text/css" href="css/leaflet.css">
-  <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <title>Ärzte in der Region Heilbronn</title>
+    <link rel="stylesheet" type="text/css" href="css/MarkerCluster.css">
+    <link rel="stylesheet" type="text/css" href="css/leaflet.css">
+    <link rel="stylesheet" type="text/css" href="css/leaflet-search.min.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 
 <body>
-  <div id="map">
-  </div>
-  <div id="info">
-    <div class="infocontent">
-      <h2><center>Wählen Sie eine Arztgruppe</center></h2>
-      <div class="control">
-        <button type="button" class="button ha">Hausärzte</button>
-        <button type="button" class="button fa">Fachärzte</button>
-        <button type="button" class="button za">Zahnärzte</button>
-      </div>
-      <div id="infotext">
-      </div>
+    <div id="map">
     </div>
-  </div>
-  <script type="text/javascript" src="js/leaflet.js"></script>
-  <script type="text/javascript" src="js/leaflet-color-markers.js"></script>
-  <script type="text/javascript" src="data/hausaerzte_region.min.js"></script>
-  <script type="text/javascript" src="data/fachaerzte_region.min.js"></script>
-  <script type="text/javascript" src="data/zahnaerzte_region.min.js"></script>
-  <script type="text/javascript" src="js/leaflet.markercluster.js"></script>
-  <script type="text/javascript" src="js/Leaflet.SwoopyArrow.min.js"></script>
-  <script type="text/javascript" src="js/leaflet-knn.min.js"></script>
-  <script type="text/javascript" src="js/map.js"></script>
+    <div id="panel">
+    <div id="activate">
+        <button type="button" class="button" id="activate-btn">Karte aktivieren</button>
+    </div>
+    <div id="info">
+        <div class="infocontent">
+            <h2><center>Wählen Sie eine Arztgruppe</center></h2>
+            <div class="control">
+                <button type="button" class="button ha">Hausärzte</button>
+                <button type="button" class="button fa">Fachärzte</button>
+                <button type="button" class="button za">Zahnärzte</button>
+            </div>
+            <div id="infotext">
+            </div>
+        </div>
+    </div>
+    </div>
+    <script src="js/leaflet.js"></script>
+    <script src="js/leaflet-color-markers.js"></script>
+    <script src="data/hausaerzte_region.min.js"></script>
+    <script src="data/fachaerzte_region.min.js"></script>
+    <script src="data/zahnaerzte_region.min.js"></script>
+    <script src="data/gemeinden.js"></script>
+    <script src="js/leaflet-search.js"></script>
+    <script src="js/leaflet.markercluster.js"></script>
+    <script src="js/Leaflet.SwoopyArrow.min.js"></script>
+    <script src="js/leaflet-knn.min.js"></script>
+    <script src="js/map.js"></script>
 </body>
+
 </html>

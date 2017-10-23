@@ -10,10 +10,10 @@ body,
   font: 12px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
 
-#info {
+#panel {
   position: absolute;
   width: 300px;
-  height: 250px;
+  height: 280px;
   z-index: 800;
   top: 20px;
   right: 20px;
@@ -49,7 +49,7 @@ body,
 }
 
 .zahnarztMarker {
-  background-color: rgb(203, 197, 41);
+  background-color: rgb(203, 133, 43);
 }
 
 .markerText {
@@ -77,8 +77,17 @@ body,
   text-align: center;
 }
 
+#activate {
+padding-bottom: 10px;
+}
+
+#activate-btn {
+  width: 100%;
+  background-color: rgb(247, 255, 0);
+}
+
 @media (max-width: 800px) {
-  #info {
+  #panel {
     position: absolute;
     top: 5px;
     right: 0;
@@ -86,11 +95,17 @@ body,
     left: 0;
     margin-left: auto;
     margin-right: auto;
-    height: 225px;
+    height: 230px;
   }
 
+  #infotext {
+  padding-top: 3px;
+  line-height: 1.4;
+}
+
   h2{
-    margin-top: -5px;
+    margin-top: -15px;
+    margin-bottom: 0px;
   }
 
   .infocontent {
@@ -98,4 +113,3 @@ body,
     padding-left: 10px;
     padding-right: 10px;
   }
-}
