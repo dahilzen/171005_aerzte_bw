@@ -8,7 +8,7 @@ function setInitialZoom() {
         initZoom = 9;
     }
     return initZoom;
-};
+}
 
 // Die eigentliche Karte initialisieren
 function main() {
@@ -18,7 +18,7 @@ function main() {
     var copy;
 
     // etwas in die Infobox schreiben
-    document.getElementById("infotext").innerHTML = "<center><p><b>Klicken Sie auf die Karte.</b></p></center>";
+    document.getElementById('infotext').innerHTML = '<center><p><b>Klicken Sie auf die Karte.</b></p></center>';
 
     // Bounding Box festlegen
     var bounds = [
@@ -38,9 +38,7 @@ function main() {
         attributionControl: true,
         legends: false,
         layer_selector: false,
-        maxBounds: bounds,
-        //       dragging: false,
-        //      touchZoom: true
+        maxBounds: bounds
     };
 
     // Karte und Basemap initialisieren
@@ -48,8 +46,9 @@ function main() {
 
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
         id: 'mapbox.light',
-        accessToken: "pk.eyJ1IjoiZGFoaWx6ZW4zMiIsImEiOiJjaXZ5OWwxam8wMDFqMnpxOXc4Y3l5dXd1In0.S9lbvSNNnpsOs4BXCzZoVg",
+        accessToken: 'pk.eyJ1IjoiZGFoaWx6ZW4zMiIsImEiOiJjaXZ5OWwxam8wMDFqMnpxOXc4Y3l5dXd1In0.S9lbvSNNnpsOs4BXCzZoVg',
     }).addTo(map);
+
 
     // Die Marker abrufen und clustern
     var hausarztMarker = L.markerClusterGroup({
@@ -104,30 +103,30 @@ function main() {
         pointToLayer: function(feature, latlng) {
             return L.marker(latlng, {
                 riseOnHover: true,
-                icon: greenIcon,
+                icon: greenIcon
             });
         },
-        onEachFeature: onEachFeature,
+        onEachFeature: onEachFeature
     });
 
     var fa = L.geoJson(fachaerzte_region, {
         pointToLayer: function(feature, latlng) {
             return L.marker(latlng, {
                 riseOnHover: true,
-                icon: blueIcon,
+                icon: blueIcon
             });
         },
-        onEachFeature: onEachFeature,
+        onEachFeature: onEachFeature
     });
 
     var za = L.geoJson(zahnaerzte_region, {
         pointToLayer: function(feature, latlng) {
             return L.marker(latlng, {
                 riseOnHover: true,
-                icon: orangeIcon,
+                icon: orangeIcon
             });
         },
-        onEachFeature: onEachFeatureZahn,
+        onEachFeature: onEachFeatureZahn
     });
 
     var gemeinden = L.geoJson(gemeinden).addTo(map);
@@ -139,41 +138,42 @@ function main() {
 
     // Events für Buttons festlegen, Hausärzte, Fachärzte oder Zahnärzte auswählen
     var hausarztClick = function() {
-        document.getElementById("infotext").innerHTML = "<center><p><b>Klicken Sie auf die Karte.</b></p></center>";
-        document.querySelector('.ha').style.backgroundColor = "rgba(40, 173, 37, .6)";
-        document.querySelector('.fa').style.backgroundColor = "";
-        document.querySelector('.za').style.backgroundColor = "";
+        document.getElementById('infotext').innerHTML = '<center><p><b>Klicken Sie auf die Karte.</b></p></center>';
+        document.querySelector('.ha').style.backgroundColor = 'rgba(40, 173, 37, .6)';
+        document.querySelector('.fa').style.backgroundColor = '';
+        document.querySelector('.za').style.backgroundColor = '';
         copy = L.geoJSON(hausaerzte_region);
         map.removeLayer(facharztMarker);
         map.removeLayer(zahnarztMarker);
         map.addLayer(hausarztMarker);
-    }
+    };
 
     var facharztClick = function() {
-        document.getElementById("infotext").innerHTML = "<center><p><b>Klicken Sie auf die Karte.</b></p></center>";
-        document.querySelector('.fa').style.backgroundColor = "rgba(45, 132, 203, .6)";
-        document.querySelector('.ha').style.backgroundColor = "";
-        document.querySelector('.za').style.backgroundColor = "";
+        document.getElementById('infotext').innerHTML = '<center><p><b>Klicken Sie auf die Karte.</b></p></center>';
+        document.querySelector('.fa').style.backgroundColor = 'rgba(45, 132, 203, .6)';
+        document.querySelector('.ha').style.backgroundColor = '';
+        document.querySelector('.za').style.backgroundColor = '';
         copy = L.geoJSON(fachaerzte_region);
         map.removeLayer(hausarztMarker);
         map.removeLayer(zahnarztMarker);
         map.addLayer(facharztMarker);
-    }
+    };
 
     var zahnarztClick = function() {
-        document.getElementById("infotext").innerHTML = "<center><p><b>Klicken Sie auf die Karte.</b></p></center>";
-        document.querySelector('.za').style.backgroundColor = "rgba(203, 133, 43, .6)";
-        document.querySelector('.ha').style.backgroundColor = "";
-        document.querySelector('.fa').style.backgroundColor = "";
+        document.getElementById('infotext').innerHTML = '<center><p><b>Klicken Sie auf die Karte.</b></p></center>';
+        document.querySelector('.za').style.backgroundColor = 'rgba(203, 133, 43, .6)';
+        document.querySelector('.ha').style.backgroundColor = '';
+        document.querySelector('.fa').style.backgroundColor = '';
         copy = L.geoJSON(zahnaerzte_region);
         map.removeLayer(facharztMarker);
         map.removeLayer(hausarztMarker);
         map.addLayer(zahnarztMarker);
-    }
 
-    document.querySelector(".ha").addEventListener('click', hausarztClick);
-    document.querySelector(".fa").addEventListener('click', facharztClick);
-    document.querySelector(".za").addEventListener('click', zahnarztClick);
+    };
+
+    document.querySelector('.ha').addEventListener('click', hausarztClick);
+    document.querySelector('.fa').addEventListener('click', facharztClick);
+    document.querySelector('.za').addEventListener('click', zahnarztClick);
     hausarztClick();
 
     // Event ausführen, wenn auf die Karte geklickt wird
@@ -197,7 +197,7 @@ function main() {
         var near5 = leafletKnn(copy).nearest(L.latLng(lat, lon), 10000, 5000);
         var near10 = leafletKnn(copy).nearest(L.latLng(lat, lon), 10000, 10000);
         var near20 = leafletKnn(copy).nearest(L.latLng(lat, lon), 10000, 20000);
-        document.getElementById("infotext").innerHTML = '<center><p><b>Nächster Arzt:<br> ' + nearest[0].layer.feature.properties.name + '</p></b>' +
+        document.getElementById('infotext').innerHTML = '<center><p><b>Nächster Arzt:<br> ' + nearest[0].layer.feature.properties.name + '</p></b>' +
             'Ärzte im Umkreis von 1km: ' + near1.length + '<br>' +
             'Ärzte im Umkreis von 5km: ' + near5.length + '<br>' +
             'Ärzte im Umkreis von 10km: ' + near10.length + '<br>' +
@@ -205,16 +205,17 @@ function main() {
     }
     map.on('click', mapClick);
 
+
     // Popups bestimmen    
     function onEachFeature(feature, layer) {
         layer.on('click', function(e) {
-            document.getElementById("infotext").innerHTML = '<center><p><b>Praxis ' + feature.properties.praxis + '</b></p><p>' + feature.properties.straße + ' in ' + feature.properties.plz_ort + '</center>';
+            document.getElementById('infotext').innerHTML = '<center><p><b>Praxis ' + feature.properties.praxis + '</b></p><p>' + feature.properties.straße + ' in ' + feature.properties.plz_ort + '</center>';
         });
     }
 
     function onEachFeatureZahn(feature, layer) {
         layer.on('click', function(e) {
-            document.getElementById("infotext").innerHTML = '<center><p><b>' + feature.properties.name + '</b></p><p>' + feature.properties.straße + ' in ' + feature.properties.plz_ort + '</center>';
+            document.getElementById('infotext').innerHTML = '<center><p><b>' + feature.properties.name + '</b></p><p>' + feature.properties.straße + ' in ' + feature.properties.plz_ort + '</center>';
         });
     }
 
@@ -224,7 +225,7 @@ function main() {
         color: '#000000',
         textClassName: 'swoopy-arrow',
         minZoom: 4,
-        maxZoom: 9,
+        maxZoom: 12,
         weight: 1,
         iconAnchor: [25, 15]
     }).addTo(map);
@@ -234,7 +235,7 @@ function main() {
         color: '#000000',
         textClassName: 'swoopy-arrow',
         minZoom: 4,
-        maxZoom: 9,
+        maxZoom: 12,
         weight: 1,
         iconAnchor: [15, 0]
     }).addTo(map);
@@ -244,21 +245,23 @@ function main() {
         color: '#000000',
         textClassName: 'swoopy-arrow',
         minZoom: 4,
-        maxZoom: 9,
+        maxZoom: 12,
         weight: 1,
         iconAnchor: [55, 10]
     }).addTo(map);
 
 
+
+// Scroll-Trap verhindern, indem bestimmte Interaktionen erst nach Buttonklick verfügbar sind.
     const activate = document.querySelector('#activate-btn');
     activate.addEventListener('click', () => {
         if (enabled) {
             activate.innerHTML = 'Karte aktivieren';
-            disableMap()
+            disableMap();
         } else {
             activate.innerHTML = 'Karte deaktivieren';
-            enableMap()
-        };
+            enableMap();
+        }
         enabled = !enabled;
     });
 
@@ -272,7 +275,7 @@ function main() {
         map.keyboard.disable();
         if (map.tap) map.tap.disable();
         document.getElementById('map').style.cursor = 'default';
-        document.getElementById('activate-btn').style.backgroundColor = "rgb(247, 255, 0)";
+        document.getElementById('activate-btn').style.backgroundColor = 'rgb(247, 255, 0)';
     }
 
     function enableMap() {
@@ -284,7 +287,7 @@ function main() {
         map.keyboard.enable();
         if (map.tap) map.tap.enable();
         document.getElementById('map').style.cursor = 'grab';
-        document.getElementById('activate-btn').style.backgroundColor = "rgba(255, 255, 255, .6)";
+        document.getElementById('activate-btn').style.backgroundColor = 'rgba(255, 255, 255, .6)';
     }
 
     let enabled = false;
@@ -292,4 +295,7 @@ function main() {
 
 }
 
-window.onload = main()
+window.onload = main();
+
+
+
